@@ -1,0 +1,118 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "LINEWORKSBotSendMSG",
+    "description": ""
+  },
+  "host": "www.worksapis.com",
+  "basePath": "/v1.0/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/bots/{botId}/users/{userId}/messages": {
+      "post": {
+        "summary": "メッセージ送信",
+        "description": "ユーザーにテキスト メッセージを送信します",
+        "operationId": "LWSendMSG",
+        "parameters": [
+          {
+            "name": "botId",
+            "default": "",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "userId",
+            "default": "",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "description": "Content-Type",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type",
+                      "title": "",
+                      "default": "text",
+                      "x-ms-visibility": "internal"
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "text"
+                    }
+                  },
+                  "description": "content",
+                  "required": [
+                    "type"
+                  ]
+                }
+              },
+              "default": {
+                "content": {
+                  "type": "text",
+                  "text": "Hello"
+                }
+              },
+              "required": [
+                "content"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "oauth2_auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://auth.worksmobile.com/oauth2/v2.0/authorize",
+      "tokenUrl": "https://auth.worksmobile.com/oauth2/v2.0/token",
+      "scopes": {
+        "bot": "bot"
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2_auth": [
+        "bot"
+      ]
+    }
+  ],
+  "tags": []
+}
