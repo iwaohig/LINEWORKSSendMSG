@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LINE WORKS",
+    "description": "LINE WORKS のトーク Bot を使ってメッセージを送信します。",
+    "version": "1.0"
+  },
+  "host": "www.worksapis.com",
+  "basePath": "/v1.0/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/bots/{botId}/users/{userId}/messages": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "ユーザーにテキスト メッセージを送信する",
+        "operationId": "TextToUser",
+        "parameters": [
+          {
+            "name": "botId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Bot ID"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ユーザーを特定する ID ユーザー ID (userId) または ログイン ID (email)",
+            "x-ms-summary": "userId または email"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type",
+                      "title": "",
+                      "default": "text",
+                      "x-ms-visibility": "internal"
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "text",
+                      "title": "メッセージの内容"
+                    }
+                  },
+                  "description": "content",
+                  "required": [
+                    "type",
+                    "text"
+                  ]
+                }
+              },
+              "required": [
+                "content"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/bots/{botId}/channels/{channelId}/messages": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "トークルームにテキスト メッセージを送信する",
+        "operationId": "TextToChannel",
+        "parameters": [
+          {
+            "name": "botId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Bot ID"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "トークルーム ID"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type",
+                      "title": "",
+                      "default": "text",
+                      "x-ms-visibility": "internal"
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "text",
+                      "title": "メッセージの内容"
+                    }
+                  },
+                  "description": "content",
+                  "required": [
+                    "type",
+                    "text"
+                  ]
+                }
+              },
+              "required": [
+                "content"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "undefined": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://auth.worksmobile.com/oauth2/v2.0/authorize",
+      "tokenUrl": "https://auth.worksmobile.com/oauth2/v2.0/token",
+      "scopes": {
+        "bot": "bot"
+      }
+    }
+  },
+  "security": [
+    {
+      "undefined": [
+        "bot"
+      ]
+    }
+  ],
+  "tags": []
+}
